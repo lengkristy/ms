@@ -1,0 +1,47 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: msservice
+  http:
+    multipart:
+      max-file-size: 10Mb
+      max-request-size: 10Mb
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.1.249:3306/ms
+      username: ycsd
+      password: ycsd
+
+ #MyBatis 配置
+mybatis:
+  mapper-locations: classpath:mappers/**/*Mapper.xml
+  configuration:
+    default-fetch-size:
+    cache-enabled: true
+    lazy-loading-enabled: true
+    multiple-result-sets-enabled: true
+    use-column-label: true
+    use-generated-keys: false
+    default-executor-type: simple
+    default-statement-timeout: 25000
+  configuration-properties:
+    dialect: mysql
+# MyBatis 分页插件配置
+pagehelper:
+  reasonable: true
+  page-size-zero: true
+  params: count=countSql;pageNum=pageindex;pageSize=pagesize
+  helper-dialect: mysql
+  offset-as-page-num: true
+  support-methods-arguments: true
+
+# 日志配置
+logging:
+  path: log
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    root: info
+    com.cyvation.baseservice: debug
